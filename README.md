@@ -1,4 +1,4 @@
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/Banner.jpg)
+![alt text](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Banner.jpg)
 
 <h3>Created using React, Electron and Node.js</h3>
 
@@ -26,15 +26,15 @@ https://github.com/j-herrm/aep-manager1/assets/78459557/bdc31b3e-f92e-46ff-b8a6-
 
 <h2>AE Explorer Projects Page</h2>
 
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/gif50.jpg)
+![projects view](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/gif50.jpg)
 
 <h3>Sort & Search</h3>
 
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/Sort%20view.PNG)
+![alt text](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Sort%20view.PNG)
 
 <h3>Context Menu</h3>
 
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/gif40.jpg)
+![alt text](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/gif40.jpg)
 
 <h2>Create Project Page</h2>
 
@@ -42,11 +42,11 @@ https://github.com/j-herrm/aep-manager1/assets/78459557/bdc31b3e-f92e-46ff-b8a6-
 
 <h2>Recently Used Projects</h2>
 
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/Recently%20Used%20Page.PNG)
+![Recently Used](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Recently%20Used%20Page.PNG)
 
 <h2>Home Page</h2>
 
-![alt text](https://github.com/j-herrm/aep-manager1/blob/test-branch/readme%20files/img/Home%20Page.PNG)
+![Home Page](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Home%20Page.PNG)
 
 
 
