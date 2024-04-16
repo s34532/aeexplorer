@@ -1,0 +1,24 @@
+
+
+
+#search-box { 
+    margin-left:30px;
+    width: max-content;
+    display: block;
+    padding: 9px 4px 9px 40px;
+    position: relative; /* Ensure the container is positioned relative */
+    background-color: white;
+    border-radius: 10px;
+}
+.search-input { 
+    font-family:inter-medium;
+    outline: none;
+    border: none;
+}
+#search-icon {
+    position: absolute;
+    left: 13px; 
+    top: 50%; 
+    transform: translateY(-50%);
+}
+

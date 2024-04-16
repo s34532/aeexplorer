@@ -1,0 +1,110 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+ :root{
+    --sidebar-width:72px;
+ }
+
+ *::-webkit-scrollbar {
+    width: 18px;
+
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #1e1e1e;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2e2e2e;
+    border-radius: 12px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #3d3d3d;
+    border-radius: 12px;
+  }
+
+body{
+    user-select: none;
+
+    
+    background: linear-gradient(
+        200.96deg,
+        #2E2EDF -29.09%,
+        #1A1645 129.35%
+        );
+
+    background-attachment: fixed;
+}
+
+
+ .app-container {
+    padding:0px;
+    display: flex;
+    height: 100vh;
+    
+}
+.sidebar {
+   
+    position:fixed;
+    width:var(--sidebar-width);
+    background-color: #00005B;
+    height:100vh;
+
+
+    z-index:9999;
+}
+
+
+
+.main-content{
+    
+    
+    padding-left:var(--sidebar-width);
+    
+    flex-grow:1;
+    height:100%;
+
+    
+    
+}
+body {
+    margin: 0;
+    
+   
+}
+
+@keyframes load-animation{
+    0%{
+        opacity:0;
+        transform:translateY(100px)
+    }
+    100%{
+        opacity:100;
+        transform:translateY(0px)
+
+    }
+}
+
+
+
+
+@font-face {
+    font-family:inter-medium;
+    src: url(..\\assets\\Font\\INTER-MEDIUM.OTF)
+}
+@font-face {
+    font-family:inter-light;
+    src: url(..\\assets\\Font\\INTER-LIGHT.OTF)
+}
+
+@font-face {
+    font-family:inter-bold;
+    src: url(..\\assets\\Font\\INTER-BOLD.OTF)
+}
+
+@font-face {
+    font-family:B612-Regular;
+    src: url(..\\assets\\Font\\B612Mono-Regular.ttf)
+}
+

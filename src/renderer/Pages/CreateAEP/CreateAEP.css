@@ -1,0 +1,66 @@
+.form{
+    border-width: 0;
+    
+}
+.form-container{
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.project-create-form{
+    
+    animation: myAnim 1.5s cubic-bezier(0,.91,0,.99) 0s 0.3 normal forwards;
+
+}
+.page-container{
+    display:flex;
+    flex-direction: column;
+
+}
+.input{
+    position:relative;
+    min-width:350px;
+  
+    height:55px;
+    font-size:20px;
+    font-family: B612-Regular;
+    color:#ffffff;
+    border:none;
+    outline:none;
+    background:none;
+    padding:12px 5px;
+    background: #343A50;
+    vertical-align: middle
+    
+}
+
+.submit{
+    margin-left:-1px;
+    border:none;
+    outline:none;
+    font-size:35px;
+    color:#ffffff65;
+    background: #343A50;
+    font-family: inter-medium;
+    width:79px;
+    height:79px;
+    vertical-align: middle
+    
+}
+
+
+
+#project-name-input::placeholder {
+    color:#ffffff65;
+}
+
+@keyframes myAnim {
+    0% {
+		transform: scale(0.2);
+	}
+
+	100% {
+		transform: scale(1.2);
+	}
+  }

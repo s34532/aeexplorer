@@ -1,0 +1,126 @@
+.context-container{
+    
+}
+  .vector {
+    align-items: center;
+    justify-content: center;
+    
+  }
+.colors-container {
+    margin-top:2px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center; /* centers items horizontally */
+  align-items: center;   
+  padding:8px;
+}
+.c1, .c2, .c3, .c4{
+    padding:2px;
+    max-width:100%;
+    height:auto;
+    display: block;
+    transform:scale(0.9);
+    margin:5;
+    
+}
+.c1:hover, .c2:hover, .c3:hover, .c4:hover{
+    
+    
+    transform:scale(1.1)
+    
+}
+.vector{
+    align-items: center;
+}
+.rightClick {
+    z-index: 12;
+    position: fixed;
+
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+    background-color:#282828;
+    color:white;
+  
+    
+    border-radius: 6px;
+    padding: 0;
+    height:auto;
+    width:120px;
+
+}
+
+.menuElement {
+    list-style: none;
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: inter-light;
+    outline-width:1px;
+
+    
+}
+
+
+.rightClick li:nth-child(2){
+    display:flex;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pin-icon{
+    margin-left: 5px;
+    fill:#ffffff;
+    transform: scale(0.8);
+}
+.rightClick li:nth-child(2):hover{
+    border-radius: 6px;
+    background-color: #ffffff1b;
+}
+.rightClick li:nth-child(3){
+    display:flex;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+ 
+}
+.rename-icon{
+    margin-left: 5px;
+    fill:#ffffff;
+    transform: scale(0.8);
+}
+.rightClick li:nth-child(3):hover{
+    border-radius: 6px;
+    background-color: #ffffff1b;
+}
+
+
+.rightClick li:nth-child(4){
+    display:flex;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+ 
+}
+.delete-icon{
+    margin-left: 5px;
+    fill:#ffffff;
+    transform: scale(0.8);
+}
+.rightClick li:nth-child(4):hover{
+    border-radius: 6px;
+    background-color: #ffffff1b;
+    
+}
+
+@keyframes scale-opacity {
+    0% {
+        opacity: 0;
+    }
+    100%{
+        
+        opacity: 100;
+    }
+}

@@ -1,0 +1,258 @@
+
+
+
+
+
+
+
+
+
+.recent-container{
+  
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    height: calc(100vh - 90px);
+    width: calc(100vw - 90px);
+    display:flex;
+    flex-direction: row;
+    overflow: hidden;
+
+  
+   
+}
+#project-date{
+  text-transform:lowercase;
+}
+.col-1, .content-column{
+    margin-top:15px;
+    display:flex;
+    flex-direction:column;
+    margin-bottom:88px;
+    
+
+    
+}
+.col-1{
+  
+    margin-left:45px;
+    width:40vh;
+}
+
+#load-animation{
+animation: load-animation 1s cubic-bezier(0, 0.75, 0.03, 1);
+}
+.content-column{
+
+  
+    margin-right:45px;
+    margin-left:3vw;
+    width:116vh;
+    justify-content: center;
+}
+
+
+.total-projects{
+    padding:0;
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+
+    padding:10px;
+
+    border-radius: 15px;
+    height:15vh;
+    max-height:140px;
+ 
+    background-color: #282828;
+}
+
+.last-project{
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+
+    padding:10px;
+
+    margin-top:4vh;
+    border-radius: 15px;
+    height:25vh;
+    max-height:200px;
+   
+    background-color: #282828;
+
+
+    display:flex;
+    flex-direction: column;
+}
+
+.last-project-title, .total-projects-title, .recent-projects-title, .pinned-projects-title{
+    font-family: inter-medium;
+    font-size:20px;
+    color:white;
+    margin:5px;
+
+}
+
+
+.pinned-projects{
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+
+    padding:10px;
+
+    border-radius: 15px;
+    height:15vh;
+    max-height:140px;
+    background-color: #282828;
+}
+
+.recent-projects {
+    min-height:450px;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: #494949;
+    padding: 10px;
+    margin-top:40px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    background-color: #282828;
+    display: flex;
+    flex-direction: column;
+    
+    overflow-x: hidden;
+
+
+}
+
+
+
+
+
+.create-project-button{
+  width:200px;
+  height:60px;
+  font-size:18px;
+
+  min-height:30px;
+  min-width:150px;
+
+}
+
+.recent-projects-container {
+    display: flex;
+    flex-direction: column;
+ 
+ 
+}
+
+.total-projects-list {
+    font-family: inter-light;
+    color: white;
+    margin:0;
+    padding:0;
+    margin: 4px 0;
+    
+   
+
+    list-style-type:none;
+    overflow-y: auto; 
+
+    margin-left: 18px;
+    
+    
+  }
+
+.title-projects-text{
+  animation:blur 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    text-transform: capitalize;
+    font-size:23px;
+    font-family: inter-bold;
+    color:white;
+    display:flex;
+    margin-top:30px;
+
+}
+
+  .list-title{
+    display:flex;
+    flex-direction: row;
+    position:relative;
+    align-items: center;
+ 
+    margin-bottom:10px;
+    column-gap: 20vw;
+    
+  }
+
+  .recent-block{
+
+    display:flex;
+    flex-direction: row;
+    position:relative;
+    align-items: center;
+
+}
+  .list-container{
+
+    display:flex;
+    flex-direction: row;
+    position:relative;
+    align-items: center;
+
+    height:60px;
+    padding-top:18px;
+    padding-bottom:18px;
+    margin-right: 20px;
+    column-gap: 20vw;
+  }
+
+  #list-col-1{
+    margin-left:1vw;
+    width:200px;
+  }
+
+  .list-project-name{
+    
+    font-size:15px;
+    white-space: nowrap;
+  
+
+  
+  overflow: hidden;
+  
+  
+  }
+
+
+  .down-arrow-icon:hover{
+    cursor: pointer;
+  }
+  .list-container:hover{
+    background-color:rgba(255, 255, 255, 0.132);
+    
+    cursor: pointer;
+    
+  }
+
+  .down-arrow-icon{
+    fill:white;
+
+    
+  }
+
+  .down-arrow:active{
+    transform: rotate(180deg);
+  }
+
+  .line{
+    margin:0;
+    padding:0;
+    border:none;
+    height:1px;
+    background-color:#494949;
+    
+    margin-right: 20px;
+  }
+
