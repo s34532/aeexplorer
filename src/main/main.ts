@@ -17,24 +17,31 @@ import { createFiles } from './functions/createJSON';
 
 const fs = require('fs');
 
-const aepPath = path.join(__dirname, '../../assets/projects');
+const home = process.env[process.platform == 'win32' ? 'USERPROFILE' : 'HOME'];
+
+const userDirectory = home;
+const aepPath = path.join(userDirectory, '/aeexplorer/projects');
 const pinnedPath = path.join(
-  __dirname,
-  '../../assets/json/pinned-projects.json',
+  userDirectory,
+  '/aeexplorer/json/pinned-projects.json',
 );
 const prioritiesPath = path.join(
-  __dirname,
-  '../../assets/json/project-priorities.json',
+  userDirectory,
+  '/aeexplorer/json/project-priorities.json',
 );
-const projectsPath = path.join(__dirname, '../../assets/json/projects.json');
+const projectsPath = path.join(userDirectory, '/aeexplorer/json/projects.json');
 const recentlyUsedPath = path.join(
-  __dirname,
-  '../../assets/json/recently-used-projects.json',
+  userDirectory,
+  '/aeexplorer/json/recently-used-projects.json',
 );
-const templatePath = path.join(__dirname, '../../assets/template/template.aep');
+
+const templatePath = app.isPackaged
+  ? path.join(process.resourcesPath, 'assets/template/template.aep')
+  : path.join(__dirname, '../../assets/template/template.aep');
 
 // Creates necessary JSON files if they don't already exist in the directory.
 createFiles(
+  userDirectory,
   pinnedPath,
   prioritiesPath,
   projectsPath,

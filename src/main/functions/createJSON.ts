@@ -1,12 +1,62 @@
+import path from 'path';
+
 const fs = require('fs');
 
 export function createFiles(
+  userDirectory: string,
   pinnedPath: string,
   prioritiesPath: string,
   projectsPath: string,
   recentlyUsedPath: string,
   aepPath: string,
 ) {
+  // Create necessary directories
+  try {
+    // Check if userDirectory/AEExplorer exists
+    fs.statSync(path.join(userDirectory, '/aeexplorer'));
+    console.log(userDirectory + ' already exists');
+  } catch (error) {
+    // Create userDirectory/AEExplorer
+    try {
+      fs.mkdirSync(path.join(userDirectory, '/aeexplorer'), {
+        recursive: true,
+      });
+
+      console.log('Directory created successfully');
+    } catch (error) {
+      return console.error(
+        'Error with creating userDirectory/AEExplorer',
+        error,
+      );
+    }
+
+    // Create userDirectory/AEExplorer/projects
+    try {
+      fs.mkdirSync(path.join(userDirectory, '/aeexplorer/projects'), {
+        recursive: true,
+      });
+    } catch (error) {
+      return console.error(
+        'Error with creating userDirectory/aeexplorer/projects',
+        error,
+      );
+    }
+
+    // Create userDirectory/AEExplorer/json
+    try {
+      fs.mkdirSync(path.join(userDirectory, '/aeexplorer/json'), {
+        recursive: true,
+      });
+    } catch (error) {
+      return console.error(
+        'Error with creating userDirectory/aeexplorer/json',
+        error,
+      );
+    }
+  }
+
+  // Create necessary JSON files
+
   // create pinned-projects.json if it doesn't exist in the path
   fs.stat(pinnedPath, (err, stats) => {
     if (err) {
