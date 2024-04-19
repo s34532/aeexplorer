@@ -1,11 +1,20 @@
-![alt text](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Banner.jpg)
+![Banner](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Banner.jpg)
 
-<h3>Created using React, Electron and Node.js</h3>
+<h3>Project created using React, Electron and Node.js</h3>
 
-**AE Explorer** is a powerful file management and efficiency tool created to speed up the Adobe After Effects workflow. Easily create, search and manage large amounts of After Effects Projects in one location quicker than it would be to create a project file repository in the windows system.
+**AE Explorer** is a powerful file management and efficiency tool created to speed up the Adobe After Effects workflow. Easily create, search and manage large amounts of After Effects Projects in one location quicker than it would be to create a project file repository in the native Windows file system.
 
-You're able to create new projects directly within the AE Explorer program so the workflow for managing an After Effects Project
-starts and ends in this program rather than using Adobes native file manager which only allows access to 9 recent projects, AE Explorer allows management of hundreds in a clean, concise format which emphasises visbility.
+<h3>Why create this project?</h3>
+
+While working on some After Effects projects and trying to reference older projects in my portfolio of work, I found that it started to get super difficult to find projects made longer than 4 months ago. I tried using Adobes recent projects and saw it only allows for the ~9 most recent projects to appear, I tried searching for the project in my Windows system and realized the search query ".aep" resulted in a large amount of redundant files due to Adobes Autos-Save feature which results in a large amount of projects title similarly to your project but on different versions, resulting in a simple search of a drive presenting upwards of thousands of After Effects Project files.
+
+<h3>How was the solution reached?</h3>
+
+I wanted to make something which was clean to use, efficient and could handle a large amount of project files if needed but also maximizing the efficiency when you only need to manage a few projects at a moment in time.
+
+First step was to design and prototype the User Interface in Figma and create supporting elements in Adobe Illustrator. This allowed me to better plan and present the idea to my self ensuring that the user functionality flow made sense before making anything set in stone. 
+
+Second step was choosing Frameworks and Languages to work with, I had previous experience with React for a project in college and when I found out about Electron I decided it'd be the best choice for the project due to its ability to run on different platforms easily and using Javascript for all parts of the program. 
 
 <h1>High Level Overview</h1>
 
@@ -30,7 +39,7 @@ https://github.com/j-herrm/aep-manager1/assets/78459557/bdc31b3e-f92e-46ff-b8a6-
 
 <h3>Sort & Search</h3>
 
-![alt text](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Sort%20view.PNG)
+![Sort](https://github.com/j-herrm/aep-manager/blob/main/readme%20files/img/Sort%20view.PNG)
 
 <h3>Context Menu</h3>
 
