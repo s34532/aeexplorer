@@ -8,8 +8,9 @@
     align-items: center;
     justify-content: center;
 }
+
 .project-create-form{
-    
+    transform:scale(1.0);
     animation: myAnim 1.5s cubic-bezier(0,.91,0,.99) 0s 0.3 normal forwards;
 
 }
@@ -61,6 +62,6 @@
 	}
 
 	100% {
-		transform: scale(1.2);
+		transform: scale(1.5);
 	}
   }

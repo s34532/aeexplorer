@@ -16,7 +16,9 @@ export type Channels =
   | 'get-recent-projects'
   | 'get-pinned'
   | 'add-pinned'
-  | 'rename-project';
+  | 'rename-project'
+  | 'show-directory-select'
+  | 'get-directory';
 
 const electronHandler = {
   ipcRenderer: {

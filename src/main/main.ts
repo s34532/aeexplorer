@@ -16,38 +16,108 @@ import {
 import { createFiles } from './functions/createJSON';
 
 const fs = require('fs');
+const { dialog } = require('electron');
 
 const home = process.env[process.platform == 'win32' ? 'USERPROFILE' : 'HOME'];
-
-const userDirectory = home;
-const aepPath = path.join(userDirectory, '/aeexplorer/projects');
-const pinnedPath = path.join(
-  userDirectory,
-  '/aeexplorer/json/pinned-projects.json',
-);
-const prioritiesPath = path.join(
-  userDirectory,
-  '/aeexplorer/json/project-priorities.json',
-);
-const projectsPath = path.join(userDirectory, '/aeexplorer/json/projects.json');
-const recentlyUsedPath = path.join(
-  userDirectory,
-  '/aeexplorer/json/recently-used-projects.json',
-);
-
-const templatePath = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets/template/template.aep')
-  : path.join(__dirname, '../../assets/template/template.aep');
-
-// Creates necessary JSON files if they don't already exist in the directory.
-createFiles(
-  userDirectory,
+let userDirectory: string;
+// create settings directory and settings if it doesn't exist
+let aepPath,
   pinnedPath,
   prioritiesPath,
   projectsPath,
   recentlyUsedPath,
-  aepPath,
-);
+  settingsPath,
+  templatePath;
+
+function setSettings() {
+  return new Promise((resolve, reject) => {
+    fs.stat(path.join(home, '/aeexplorer-settings'), (err, stats) => {
+      if (err) {
+        // create settings folder
+        try {
+          fs.mkdirSync(path.join(home, '/aeexplorer-settings'), {
+            recursive: true,
+          });
+
+          fs.writeFileSync(
+            path.join(home, '/aeexplorer-settings/settings.json'),
+            JSON.stringify({ home }),
+          );
+
+          resolve();
+        } catch (error) {
+          console.error(error);
+          reject(error);
+        }
+
+        // create settings.json
+      } else {
+        console.log(settingsPath + ' Exists already');
+        resolve();
+      }
+    });
+  });
+}
+
+function readSettings() {
+  return new Promise((resolve, reject) => {
+    try {
+      let read = fs.readFileSync(
+        path.join(home, '/aeexplorer-settings/settings.json'),
+      );
+      let json = JSON.parse(read);
+      userDirectory = json['home'];
+      resolve();
+    } catch (error) {
+      console.error(error);
+      reject(error);
+    }
+  });
+}
+
+async function initializeApp() {
+  try {
+    await setSettings();
+    await readSettings();
+
+    aepPath = path.join(userDirectory, '/aeexplorer/projects');
+    pinnedPath = path.join(
+      userDirectory,
+      '/aeexplorer/json/pinned-projects.json',
+    );
+    prioritiesPath = path.join(
+      userDirectory,
+      '/aeexplorer/json/project-priorities.json',
+    );
+    projectsPath = path.join(userDirectory, '/aeexplorer/json/projects.json');
+    recentlyUsedPath = path.join(
+      userDirectory,
+      '/aeexplorer/json/recently-used-projects.json',
+    );
+
+    settingsPath = path.join(home, '/aeexplorer-settings/settings.json');
+
+    templatePath = app.isPackaged
+      ? path.join(process.resourcesPath, 'assets/template/template.aep')
+      : path.join(__dirname, '../../assets/template/template.aep');
+
+    // Creates necessary JSON files if they don't already exist in the directory.
+    createFiles(
+      userDirectory,
+      pinnedPath,
+      prioritiesPath,
+      projectsPath,
+      recentlyUsedPath,
+      aepPath,
+      settingsPath,
+      home,
+    );
+  } catch (error) {
+    console.error('Error during app initialization', error);
+  }
+}
+
+initializeApp();
 
 class AppUpdater {
   constructor() {
@@ -58,6 +128,44 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+
+ipcMain.on('get-directory', async (event, args) => {
+  try {
+    let read = fs.readFileSync(settingsPath, 'utf-8');
+    let json = JSON.parse(read);
+
+    event.reply('get-directory', json['home']);
+  } catch (error) {}
+});
+
+ipcMain.on('show-directory-select', async (event, args) => {
+  dialog
+    .showOpenDialog(mainWindow, {
+      properties: ['openFile', 'openDirectory'],
+    })
+    .then((result) => {
+      console.log(result.canceled);
+      console.log(result.filePaths);
+
+      // Set & Restart
+      if (!result.canceled) {
+        let read = fs.readFileSync(settingsPath, 'utf-8');
+        let json = JSON.parse(read);
+        json['home'] = result.filePaths[0];
+
+        try {
+          let newJSON = JSON.stringify(json);
+          fs.writeFileSync(settingsPath, newJSON);
+
+          app.relaunch();
+          app.quit();
+        } catch (error) {}
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 // Get file path
 
@@ -333,11 +441,11 @@ ipcMain.on('delete-project', async (event, args) => {
   } catch (error) {}
 });
 ipcMain.on('set-priority', async (event, args) => {
-  changePriority(args);
+  changePriority(args, prioritiesPath);
 });
 
 ipcMain.on('get-priorities', async (event) => {
-  let json = getPriorities();
+  let json = getPriorities(prioritiesPath);
   event.reply('get-priorities', json);
 });
 
@@ -388,7 +496,7 @@ ipcMain.on('open-aep', async (event, folderName) => {
     process.platform === 'darwin'
       ? `open "${folderName}"`
       : process.platform === 'win32'
-      ? `start "" "${folderName}"`
+      ? `start /b "" "${folderName}"`
       : process.platform === 'linux'
       ? `xdg-open "${folderName}"`
       : null;
@@ -498,7 +606,7 @@ ipcMain.on('create-aep', async (event, fileName) => {
   // Add to recently used/created
 
   addRecentAEP(fileName);
-  addPriorityDefault(fileName);
+  addPriorityDefault(fileName, prioritiesPath);
 });
 
 if (process.env.NODE_ENV === 'production') {

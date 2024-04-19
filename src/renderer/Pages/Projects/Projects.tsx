@@ -182,7 +182,7 @@ const Projects = (props: Props) => {
         {filteredProjects.map((project, index) => (
           <li
             id="project-list"
-            onDoubleClick={() => handleOpen(project)}
+            onClick={() => handleOpen(project)}
             key={index}
             className="project-item"
             onContextMenu={(e) => showNav(e, project)}
@@ -207,7 +207,7 @@ const Projects = (props: Props) => {
               {dictionary[date].map((project, index) => (
                 <li
                   id="project-list"
-                  onDoubleClick={() => handleOpen(project.name)}
+                  onClick={() => handleOpen(project.name)}
                   key={index}
                   className="project-item"
                   onContextMenu={(e) => showNav(e, project.name)}
@@ -264,7 +264,7 @@ const Projects = (props: Props) => {
             {pinnedProjects.map((name, index) => (
               <li
                 id="project-list"
-                onDoubleClick={() => handleOpen(name)}
+                onClick={() => handleOpen(name)}
                 key={index}
                 className="project-item"
                 onContextMenu={(e) => showNav(e, name)}

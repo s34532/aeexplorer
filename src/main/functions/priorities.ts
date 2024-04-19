@@ -1,15 +1,12 @@
 //@ts-nocheck
 const fs = require('fs');
 
-export function addPriorityDefault(name: string) {
+export function addPriorityDefault(name: string, prioritiesPath: string) {
   let properties;
   let jsonObj: { [key: string]: { priority: number } } = {};
   let keys = [];
   try {
-    properties = fs.readFileSync(
-      'E:\\Repository\\aep-manager1\\assets\\json\\project-priorities.json',
-      'utf-8',
-    );
+    properties = fs.readFileSync(prioritiesPath, 'utf-8');
   } catch (error) {
     console.log('error reading properties json');
     return;
@@ -29,10 +26,7 @@ export function addPriorityDefault(name: string) {
   }
 
   try {
-    fs.writeFileSync(
-      'E:\\Repository\\aep-manager1\\assets\\json\\project-priorities.json',
-      JSON.stringify(properties),
-    );
+    fs.writeFileSync(prioritiesPath, JSON.stringify(properties));
     console.log(
       'Succesfully wrote property ' + name + ' to the properties json!',
     );
@@ -41,16 +35,13 @@ export function addPriorityDefault(name: string) {
   }
 }
 
-export function changePriority(args) {
+export function changePriority(args, prioritiesPath: string) {
   let name = args[0];
   let priority = args[1];
   console.log('project name: ' + name);
   let properties;
   try {
-    properties = fs.readFileSync(
-      'E:\\Repository\\aep-manager1\\assets\\json\\project-priorities.json',
-      'utf-8',
-    );
+    properties = fs.readFileSync(prioritiesPath, 'utf-8');
   } catch (error) {
     console.log('error reading properties json');
     return;
@@ -68,10 +59,7 @@ export function changePriority(args) {
   }
 
   try {
-    fs.writeFileSync(
-      'E:\\Repository\\aep-manager1\\assets\\json\\project-priorities.json',
-      JSON.stringify(properties),
-    );
+    fs.writeFileSync(prioritiesPath, JSON.stringify(properties));
     console.log(
       'Succesfully wrote property ' + name + ' to the properties json!',
     );
@@ -80,13 +68,10 @@ export function changePriority(args) {
   }
 }
 
-export function getPriorities() {
+export function getPriorities(prioritiesPath: string) {
   let json;
   try {
-    json = fs.readFileSync(
-      'E:\\Repository\\aep-manager1\\assets\\json\\project-priorities.json',
-      'utf-8',
-    );
+    json = fs.readFileSync(prioritiesPath, 'utf-8');
     json = JSON.parse(json);
     return json;
   } catch (error) {

@@ -26,8 +26,7 @@
 
 body{
     user-select: none;
-
-    
+ 
     background: linear-gradient(
         200.96deg,
         #2E2EDF -29.09%,
@@ -78,6 +77,18 @@ body {
     0%{
         opacity:0;
         transform:translateY(100px)
+    }
+    100%{
+        opacity:100;
+        transform:translateY(0px)
+
+    }
+}
+
+@keyframes load-animation-2{
+    0%{
+        opacity:0;
+        transform:translateY(25px)
     }
     100%{
         opacity:100;

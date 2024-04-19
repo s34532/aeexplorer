@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg';
 import { Link } from 'react-router-dom';
+import { ReactComponent as ChevronRight } from '../../../../assets/chevron-right.svg';
 
 interface Props {}
 
@@ -24,9 +25,11 @@ const HomePage = (props: Props) => {
               Organize your After Effects Projects all in one location.
             </p>
 
-            <Link to={'/CreateAEP'} className="start-button">
-              <button className="start-button">Start now</button>
-            </Link>
+            <div className="homepage-button-container">
+              <Link to={'/CreateAEP'} className="start-button">
+                <span className="button-text">Start now</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

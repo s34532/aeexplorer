@@ -14,7 +14,11 @@
 
 
 .content-1{
-    
+   
+  
+   
+
+
     animation: load-animation 1s cubic-bezier(0, 0.75, 0.03, 1);
     margin:auto;
   
@@ -62,6 +66,11 @@
     margin-top:25px;
 }
 
+.homepage-button-container{
+    display:flex;
+    flex-direction:row;
+    gap:20px;
+}
 
 .start-button{
     
@@ -71,19 +80,24 @@
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
+    box-shadow:inset 0px 0px 4px 2px rgba(255, 255, 255, 0.333);
 
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
  
 /*     
     outline-style: solid;
     outline-width:1px;
     outline-color: #494949; */
-    border-radius:5px;
-    font-family: inter-light;
+    border-radius:40px;
+    font-family: inter-medium;
     color:rgb(255, 255, 255);
     width:165px;
-    height:60px;
+    height:50px;
     background-color: #2489FF;
-    font-size: 24px;
+    font-size: 17px;
     margin-top:auto;
 
     
@@ -91,6 +105,11 @@
     
 }
 .start-button:hover{
+   
+    background: linear-gradient(-90deg, #2489FF, #6db1ff, #2489FF);
+	background-size: 400% 400%;
+    animation: button-wipe 5s infinite;
+
     transform: scale(1.02);
 }
 @keyframes gradient {
@@ -103,4 +122,14 @@
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+@keyframes button-wipe {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 400% 50%;
+	}
+
 }
