@@ -38,13 +38,14 @@
    
     font-family: inter-bold;
     
-    background: linear-gradient(-45deg, #ee7752, #C12CE6, #3EBFF7, #23d5ab);
+    background: linear-gradient(-45deg, #ee7752, #FD37D6, #2489FF, #23d5ab);
 	background-size: 400% 400%;
     animation: gradient 5s infinite;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
+
+    transform: translateZ(0);
 
 }
 

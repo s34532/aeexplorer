@@ -1,0 +1,48 @@
+.notification-container {
+    overflow: hidden;
+    animation: notification 0.3s;
+    
+    position: fixed;
+    bottom: 20px; 
+    left: 20px;   
+    
+    display: flex;
+    flex-direction: column;
+    z-index: 99999999;
+}
+.info-icon{
+    animation: rotate-icon 1s linear infinite;
+}
+.text-notification {
+    font-family: 'Inter Medium', sans-serif;
+    color: white;
+
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row; 
+
+    align-items: center;
+}
+
+@keyframes notification {
+    0%{
+        overflow:hidden;
+        transform:translateX(-40px);
+        opacity:0;
+    }
+    100%{
+    }
+}
+
+@keyframes rotate-icon{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}

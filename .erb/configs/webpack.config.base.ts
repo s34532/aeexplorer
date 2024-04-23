@@ -14,19 +14,32 @@ const configuration: webpack.Configuration = {
 
   module: {
     rules: [
+      // existing rules for .ts and .tsx files
       {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'ts-loader',
           options: {
-            // Remove this line to enable type checking in webpack builds
             transpileOnly: true,
             compilerOptions: {
               module: 'esnext',
             },
           },
         },
+      },
+
+      {
+        test: /\.mp4$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/videos/',
+            },
+          },
+        ],
       },
     ],
   },

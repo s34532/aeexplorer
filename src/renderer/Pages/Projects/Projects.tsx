@@ -1,9 +1,9 @@
 //@ts-nocheck
 import React from 'react';
 import './Projects.css';
-
+import '../../Components/Notification/Notification.css';
 import './DropDownMenu.css';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import AEP1 from '/assets/aepversions/aep-icon-default.svg';
 import AEP2 from '/assets/aepversions/aep-icon-green.svg';
 import AEP3 from '/assets/aepversions/aep-icon-red.svg';
@@ -16,6 +16,8 @@ import ContextMenu from '../../Components/ContextMenu/ContextMenu';
 import SortBox from '../../Components/SortBox/SortBox';
 import DeleteProject from '../../Components/DeleteProject/DeleteProject';
 import RenameProject from '../../Components/RenameProject/RenameProject';
+import RecoverProject from '../../Components/RecoverProject/RecoverProject';
+import Notification from '../../Components/Notification/Notification';
 
 const Projects = (props: Props) => {
   const [fix, setFix] = useState(false);
@@ -35,10 +37,17 @@ const Projects = (props: Props) => {
   const [refreshProject, setRefresh] = useState(true);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [renameModalVisibility, setRenameVisibility] = useState(false);
+  const [recoverModalVisibility, setRecoverVisibility] = useState(false);
   const [deleteRefresh, setDeleteRefresh] = useState(true);
   const [pinnedProjects, setPinned] = useState([]);
   const [showPin, setPinVisibility] = useState(false);
   const [nameChanged, setNameChanged] = useState(false);
+
+  const [notificationText, setNotificationText] = useState('');
+  const [notificationVisibility, setNotificationVisibility] = useState(false);
+
+  const [responseCode, setResponseCode] = useState(false);
+  const [projectsLength, setProjectsLength] = useState(0);
 
   function pinProject(name) {
     window.electron.ipcRenderer.sendMessage('add-pinned', [name]);
@@ -132,17 +141,27 @@ const Projects = (props: Props) => {
   function handleOpen(project: string) {
     window.electron.ipcRenderer.sendMessage('open-aep', project);
     window.electron.ipcRenderer.sendMessage('add-recent-aep', project);
+    setResponseCode(true);
+    setNotificationText('Opening ' + project + '.aep...');
+    setNotificationVisibility(true);
   }
 
   function showNav(event, project: string) {
     setSelected(project);
     event.preventDefault();
     setContext(false);
-
-    let positionChange = {
-      x: event.pageX - window.scrollX + 2,
-      y: event.pageY - window.scrollY + -10,
-    };
+    let positionChange;
+    if (window.innerHeight / 2 + 145 < event.pageY - window.scrollY) {
+      positionChange = {
+        x: event.pageX - window.scrollX + 1,
+        y: event.pageY - window.scrollY + -205,
+      };
+    } else {
+      positionChange = {
+        x: event.pageX - window.scrollX + 1,
+        y: event.pageY - window.scrollY + -1,
+      };
+    }
 
     setxyPosition(positionChange);
     setContext(true);
@@ -312,6 +331,14 @@ const Projects = (props: Props) => {
     }
   }, [searchItem]);
 
+  useEffect(() => {
+    if (notificationVisibility == true) {
+      setTimeout(() => {
+        setNotificationVisibility(false);
+      }, 1800);
+    }
+  }, [notificationVisibility]);
+
   return (
     <div>
       <div className="container">
@@ -322,6 +349,9 @@ const Projects = (props: Props) => {
             refreshProject={refreshProject}
             setRefresh={setRefresh}
             setContext={setContext}
+            setNotificationText={setNotificationText}
+            setNotificationVisibility={setNotificationVisibility}
+            setResponseCode={setResponseCode}
           />
         )}
 
@@ -334,6 +364,29 @@ const Projects = (props: Props) => {
             setRenameVisibility={setRenameVisibility}
             setNameChanged={setNameChanged}
             nameChanged={nameChanged}
+            setNotificationText={setNotificationText}
+            setNotificationVisibility={setNotificationVisibility}
+            setResponseCode={setResponseCode}
+          />
+        )}
+
+        {recoverModalVisibility && (
+          <RecoverProject
+            selectedProject={selectedProject}
+            refreshProject={refreshProject}
+            setRefresh={setRefresh}
+            setContext={setContext}
+            setRecoverVisibility={setRecoverVisibility}
+            setNotificationText={setNotificationText}
+            setNotificationVisibility={setNotificationVisibility}
+            setResponseCode={setResponseCode}
+          />
+        )}
+
+        {notificationVisibility && (
+          <Notification
+            notificationText={notificationText}
+            responseCode={responseCode}
           />
         )}
 
@@ -351,6 +404,7 @@ const Projects = (props: Props) => {
           setSelected={setSelected}
           pinProject={pinProject}
           setRenameVisibility={setRenameVisibility}
+          setRecoverVisibility={setRecoverVisibility}
         />
 
         <span className="container-background">

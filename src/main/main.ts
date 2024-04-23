@@ -128,6 +128,90 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+ipcMain.on('get-project-count', async (event, args) => {
+  const files = fs.readdirSync(aepPath);
+
+  event.reply('get-project-count', files.length);
+});
+ipcMain.on('recover-aep', async (event, args) => {
+  let projectName = args[0];
+  // Check if there's an autosave folder
+
+  fs.stat(
+    aepPath + '//' + projectName + '//' + 'Adobe After Effects Auto-Save',
+    (err, stats) => {
+      if (err) {
+        console.log('No autosaves directive.');
+        event.reply('recover-aep', [false, 'no auto-saves directive exists.']);
+        return;
+      }
+
+      // Take most recent file and
+
+      var files = fs.readdirSync(
+        aepPath + '//' + projectName + '//' + 'Adobe After Effects Auto-Save',
+      );
+
+      for (var i = 0; i < files.length; i++) {
+        if (path.extname(files[i]) != '.aep') {
+          files.splice(i, 1);
+        }
+      }
+
+      if (files[files.length - 1] != null) {
+        console.log(files[files.length - 1]);
+        const currentDate = new Date();
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        const dateString =
+          currentDayOfMonth + '-' + (currentMonth + 1) + '-' + currentYear;
+
+        // add the main file to archive
+        fs.renameSync(
+          // old path, new path
+          aepPath + '//' + projectName + '//' + projectName + '.aep',
+          aepPath +
+            '//' +
+            projectName +
+            '//' +
+            'Archive' +
+            '//' +
+            projectName +
+            '(Archived) ' +
+            dateString +
+            '.aep',
+        );
+
+        // replace main file with autosave file
+
+        fs.renameSync(
+          // old path, new path
+          aepPath +
+            '//' +
+            projectName +
+            '//' +
+            'Adobe After Effects Auto-Save' +
+            '//' +
+            files[files.length - 1],
+          aepPath + '//' + projectName + '//' + projectName + '.aep',
+        );
+
+        // delete  autosave file
+
+        console.log('file moved');
+        event.reply('recover-aep', [
+          true,
+          'Reverted to ' + files[files.length - 1] + '.',
+        ]);
+      } else {
+        console.log('ERROR: No further auto-saves to recover from.');
+        event.reply('recover-aep', [false, 'no more auto-saves available.']);
+      }
+    },
+  );
+});
 
 ipcMain.on('get-directory', async (event, args) => {
   try {
@@ -173,6 +257,21 @@ ipcMain.on('rename-project', async (event, args) => {
   let oldName = args[0];
   let newName = args[1];
 
+  if (newName == null || newName == '' || newName == ' ') {
+    event.reply('rename-project', [false, 'file name cannot be blank!']);
+    return;
+  }
+  var files = fs.readdirSync(aepPath);
+
+  for (var i = 0; i < files.length; i++) {
+    console.log(files[i]);
+    if (newName == files[i]) {
+      console.log('file already exists');
+      event.reply('rename-project', [false, 'file name already exists!']);
+      return;
+    }
+  }
+
   // Rename from pinned-projects.json
   try {
     let read = fs.readFileSync(pinnedPath, 'utf-8');
@@ -191,6 +290,10 @@ ipcMain.on('rename-project', async (event, args) => {
   // Rename from File
   try {
     fs.renameSync(aepPath + '\\' + oldName, aepPath + '\\' + newName);
+    event.reply('rename-project', [
+      true,
+      'renamed ' + oldName + ' to ' + newName + '.',
+    ]);
   } catch (error) {
     console.error(error);
   }
@@ -439,6 +542,8 @@ ipcMain.on('delete-project', async (event, args) => {
       },
     );
   } catch (error) {}
+
+  event.reply('delete-project', [true, 'successfully deleted ' + args[0]]);
 });
 ipcMain.on('set-priority', async (event, args) => {
   changePriority(args, prioritiesPath);
@@ -600,6 +705,13 @@ ipcMain.on('create-aep', async (event, fileName) => {
   try {
     fs.copyFileSync(templatePath, newDirective + '\\' + fileName + '.aep');
   } catch (err) {
+    console.log(err);
+  }
+
+  // Make archive folder
+  try {
+    fs.mkdirSync(newDirective + '\\' + 'Archive');
+  } catch {
     console.log(err);
   }
 

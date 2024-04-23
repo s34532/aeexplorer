@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './Recent.css';
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg';
 
+import video from '../../../../assets/Background_1.mp4';
 interface Props {}
 
 const Recent = (props: Props) => {

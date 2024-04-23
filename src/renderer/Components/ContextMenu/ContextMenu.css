@@ -65,6 +65,7 @@
 
 .rightClick li:nth-child(2){
     display:flex;
+   
     color:#ffffff;
     align-items: center;
     justify-content: space-between;
@@ -109,11 +110,38 @@
     fill:#ffffff;
     transform: scale(0.8);
 }
+
+
+
 .rightClick li:nth-child(4):hover{
     border-radius: 6px;
     background-color: #ffffff1b;
     
 }
+
+.rightClick li:nth-child(5){
+    display:flex;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+ 
+}
+.recover-icon{
+    
+    margin-left: 5px;
+    fill:#ffffff;
+    transform: scale(0.8);
+    
+}
+
+.rightClick li:nth-child(5):hover{
+
+    
+    border-radius: 6px;
+    background-color: #ffffff1b;
+    
+}
+
 
 @keyframes scale-opacity {
     0% {

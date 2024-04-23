@@ -11,16 +11,29 @@ function RenameProject({
   setRenameVisibility,
   setNameChanged,
   nameChanged,
+  setNotificationText,
+  setNotificationVisibility,
+  setResponseCode,
 }) {
   const [newName, setName] = useState('');
   function handleRename(e) {
     setName(e.target.value);
   }
+  function showNotification(response) {
+    setNotificationText(response[1]);
+    setResponseCode(response[0]);
+    setNotificationVisibility(true);
+  }
+
   function handleSubmit() {
     window.electron.ipcRenderer.sendMessage('rename-project', [
       selectedProject,
       newName,
     ]);
+
+    window.electron.ipcRenderer.once('rename-project', (response) => {
+      showNotification(response);
+    });
   }
 
   return (
@@ -44,6 +57,7 @@ function RenameProject({
         <div className="rename-item-center-row">
           <form>
             <input
+              autoFocus
               placeholder={selectedProject}
               className="rename-form"
               onChange={handleRename}

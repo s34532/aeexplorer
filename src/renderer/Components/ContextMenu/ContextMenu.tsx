@@ -9,6 +9,7 @@ import Color4 from '../../../../assets/aepversions/aep-color-gold.svg';
 import { ReactComponent as DeleteIcon } from '../../../../assets/delete-forever.svg';
 import { ReactComponent as Pin } from '../../../../assets/pin.svg';
 import { ReactComponent as Rename } from '../../../../assets/rename.svg';
+import { ReactComponent as Recover } from '../../../../assets/history.svg';
 
 const ContextMenu = ({
   showNav,
@@ -24,6 +25,8 @@ const ContextMenu = ({
   setSelected,
   pinProject,
   setRenameVisibility,
+  recoverAEP,
+  setRecoverVisibility,
 }) => {
   return (
     <div
@@ -109,6 +112,17 @@ const ContextMenu = ({
           >
             <div>Rename</div>
             <Rename className="rename-icon" />
+          </li>
+          <li
+            className="menuElement"
+            onClick={(e) => {
+              e.stopPropagation();
+              setRecoverVisibility(true);
+              setContext(false);
+            }}
+          >
+            <div>Recover</div>
+            <Recover className="recover-icon" />
           </li>
           <li
             className="menuElement"

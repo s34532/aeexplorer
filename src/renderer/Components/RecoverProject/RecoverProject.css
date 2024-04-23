@@ -1,0 +1,118 @@
+#modal-visibility{
+    visibility: visible;
+}
+.delete-modal-container-background{
+    
+    position:fixed;
+    background-color: rgba(0, 0, 0, 0.372);
+    width:100%;
+    height:100%;
+    z-index:99998;
+    backdrop-filter:blur(2px);
+}
+.delete-modal-container{
+  animation: scale-modal 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius:20px;
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+ 
+  width:400px;
+  height:170px;
+  background-color: #202020;
+  z-index:99999;
+
+  display:flex;
+  flex-direction:column;
+  padding:50px;
+ 
+}
+.delete-item-title-row{
+    font-family: inter-medium;
+    font-size:25px;
+    display:flex;
+    flex-direction: row;
+
+    color:white;
+    fill:rgb(183, 183, 183);
+    align-items: center;
+    justify-content: space-between
+
+    
+}
+.delete-item-center-row{
+    font-size:15px;
+    margin-top:30px;
+    font-family: inter-light;
+    color:rgb(183, 183, 183);
+}
+.bottom-row{
+    margin-top:auto; 
+    display:flex;
+    flex-direction: row-reverse;   
+}
+
+.remove-icon{
+    cursor: pointer;
+}
+
+.recover-button{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+
+
+    font-family: inter-medium;
+    width:auto;
+    margin-left:10px;
+    margin-right:20px;
+    background-color:#202020;
+
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+    border-radius:5px;
+    padding: 9px 18px 9px 18px;
+    font-family: inter-medium;
+    width:auto;
+    margin-left:10px;
+    margin-right:10px;
+    background-color:#202020;
+    color:white;
+    color:#2489FF;
+}
+.cancel-button{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+
+    outline-style: solid;
+    outline-width:1px;
+    outline-color: #494949;
+    border-radius:5px;
+    padding: 9px 18px 9px 18px;
+    font-family: inter-medium;
+    width:auto;
+    margin-left:10px;
+    margin-right:10px;
+    background-color:#202020;
+    color:white;
+
+
+}
+
+@keyframes scale-modal { 
+    0%{
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

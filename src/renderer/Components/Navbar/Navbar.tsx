@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import { ReactComponent as Logo } from '/assets/Custom LogoGroup.svg';
+import { ReactComponent as Logo } from '/assets/icon.svg';
 import { ReactComponent as HomeIcon } from '/assets/home.svg';
 import { ReactComponent as Folder } from '/assets/folder.svg';
 import { ReactComponent as Settings } from '/assets/settings.svg';
@@ -45,7 +45,7 @@ function Navbar() {
             draggable="false"
           >
             <div className="tooltip">
-              <Folder className="icon" />
+              <Folder className="folder-icon" />
               <span className="tooltiptext">Projects</span>
             </div>
           </Link>

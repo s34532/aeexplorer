@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg';
@@ -8,25 +7,81 @@ import { ReactComponent as ChevronRight } from '../../../../assets/chevron-right
 interface Props {}
 
 const HomePage = (props: Props) => {
+  const [projectsLength, setProjectsLength] = useState(0);
+  const [hasProjects, setHasProjects] = useState(false);
+
+  function projectNames() {
+    if (projectsLength >= 2) {
+      return (
+        <>
+          <div className="big-title">
+            You have <span className="highlighted-text">{projectsLength}</span>{' '}
+            Projects!
+          </div>
+          <p className="homepage-text">Start optimizing your workflow today!</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="big-title">
+            You have <span className="highlighted-text">{projectsLength}</span>{' '}
+            project waiting for you!
+          </div>
+          <p className="homepage-text">
+            Start optimizing your workflow and create today!
+          </p>
+        </>
+      );
+    }
+  }
+
+  function getProjectsLength() {
+    window.electron.ipcRenderer.sendMessage('get-project-count');
+    window.electron.ipcRenderer.once('get-project-count', (response: any) => {
+      setProjectsLength(response);
+    });
+  }
+
+  useEffect(() => {
+    getProjectsLength();
+
+    if (projectsLength > 0) {
+      console.log(projectsLength);
+      setHasProjects(true);
+    }
+  }, [projectsLength]);
+
   return (
     <div>
       <div className="container">
         <div className="title-block">
-          <div className="title-text">Home</div>
+          <div className="title-text">
+            {' '}
+            <span>Home</span>
+          </div>
         </div>
-
         <div className="block-container">
           <div className="content-1">
-            <div className="big-title">
-              After Effects Project management made{' '}
-              <span className="highlighted-text">effortless.</span>
-            </div>
-            <p className="homepage-text">
-              Organize your After Effects Projects all in one location.
-            </p>
+            {hasProjects ? (
+              projectNames()
+            ) : (
+              <>
+                <div className="big-title">
+                  After Effects Project management made{' '}
+                  <span className="highlighted-text">effortless.</span>
+                </div>
+                <p className="homepage-text">
+                  Organize your After Effects Projects all in one location.
+                </p>
+              </>
+            )}
 
             <div className="homepage-button-container">
-              <Link to={'/CreateAEP'} className="start-button">
+              <Link
+                to={hasProjects ? '/projects' : '/CreateAEP'}
+                className="start-button"
+              >
                 <span className="button-text">Start now</span>
               </Link>
             </div>
