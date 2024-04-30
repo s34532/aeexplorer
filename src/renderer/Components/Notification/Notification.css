@@ -1,4 +1,5 @@
 .notification-container {
+    margin-left:var(--sidebar-width);
     overflow: hidden;
     animation: notification 0.3s;
     

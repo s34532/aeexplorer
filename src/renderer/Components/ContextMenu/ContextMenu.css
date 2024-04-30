@@ -10,7 +10,7 @@
     margin-top:2px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-content: center; /* centers items horizontally */
+  justify-content: center; 
   align-items: center;   
   padding:8px;
 }
@@ -23,7 +23,25 @@
     margin:5;
     
 }
-.c1:hover, .c2:hover, .c3:hover, .c4:hover{
+
+.c5{
+    max-width:100%;
+    height:auto;
+    display: block;
+    transform:scale(0.9);
+    margin:5; 
+    fill:#FC3838;
+}
+
+.c6{
+    max-width:100%;
+    height:auto;
+    display: block;
+    transform:scale(0.9);
+    margin:5; 
+    fill:#3EF93A;
+}
+.c1:hover, .c2:hover, .c3:hover, .c4:hover, .c5:hover, .c6:hover{
     
     
     transform:scale(1.1)

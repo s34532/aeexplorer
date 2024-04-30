@@ -8,6 +8,8 @@ import AEP1 from '/assets/aepversions/aep-icon-default.svg';
 import AEP2 from '/assets/aepversions/aep-icon-green.svg';
 import AEP3 from '/assets/aepversions/aep-icon-red.svg';
 import AEP4 from '/assets/aepversions/aep-icon-gold.svg';
+import AEP5 from '/assets/aepversions/aep-icon-block.svg';
+import AEP6 from '/assets/aepversions/aep-icon-check.svg';
 import { Link } from 'react-router-dom';
 import searchIcon from '/assets/search.svg';
 import { randomEmoji } from './functions/randomEmoji';
@@ -60,24 +62,9 @@ const Projects = (props: Props) => {
     window.electron.ipcRenderer.sendMessage('set-priority', [name, priority]);
   }
 
-  function setFixed() {
-    if (window.scrollY >= 1) {
-      setContext(false);
-    }
-    if (window.scrollY >= 400) {
-      setFix(true);
-    } else {
-      setFix(false);
-    }
-  }
-
-  window.addEventListener('scroll', setFixed);
-
   function windowClick() {
     setContext(false);
   }
-
-  window.addEventListener('click', windowClick);
 
   const handleInputChange = (e: { target: { value: any } }) => {
     const searchTerm = e.target.value;
@@ -189,8 +176,12 @@ const Projects = (props: Props) => {
         return <img className="aep-img" src={AEP3} />;
       case 3:
         return <img className="aep-img" src={AEP4} />;
+      case 4:
+        return <img className="aep-img" src={AEP5} />;
+      case 5:
+        return <img className="aep-img" src={AEP6} />;
       default:
-        return <img className="aep-img" src={AEP4} />;
+        return <img className="aep-img" src={AEP1} />;
         break;
     }
   };
@@ -307,6 +298,28 @@ const Projects = (props: Props) => {
       </>
     );
   }
+  useEffect(() => {
+    const scrollElement = document.querySelector('#projects-content');
+    const setFixed = () => {
+      console.log(scrollElement.scrollTop);
+      if (scrollElement.scrollTop >= 1) {
+        setContext(false);
+      }
+      if (scrollElement.scrollTop >= 400) {
+        setFix(true);
+      } else {
+        setFix(false);
+      }
+    };
+
+    scrollElement.addEventListener('scroll', setFixed);
+    window.addEventListener('click', windowClick);
+
+    return () => {
+      scrollElement.removeEventListener('scroll', setFixed);
+      window.removeEventListener('click', windowClick);
+    };
+  }, []);
 
   useEffect(() => {
     getPinned();
@@ -341,7 +354,7 @@ const Projects = (props: Props) => {
 
   return (
     <div>
-      <div className="container">
+      <div className="container" id="projects-content">
         {modalVisibility && (
           <DeleteProject
             setModalVisibility={setModalVisibility}

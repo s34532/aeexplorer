@@ -6,6 +6,9 @@ import Color1 from '../../../../assets/aepversions/aep-color-default.svg';
 import Color2 from '../../../../assets/aepversions/aep-color-green.svg';
 import Color3 from '../../../../assets/aepversions/aep-color-red.svg';
 import Color4 from '../../../../assets/aepversions/aep-color-gold.svg';
+import { ReactComponent as Block } from '../../../../assets/block.svg';
+import { ReactComponent as Check } from '../../../../assets/check.svg';
+
 import { ReactComponent as DeleteIcon } from '../../../../assets/delete-forever.svg';
 import { ReactComponent as Pin } from '../../../../assets/pin.svg';
 import { ReactComponent as Rename } from '../../../../assets/rename.svg';
@@ -88,6 +91,30 @@ const ContextMenu = ({
                   setRefresh(!refreshProject);
                 }}
               />
+            </div>
+            <div className="c5">
+              <Block
+                className="vector"
+                src={Block}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  changePriority(selectedProject, 4);
+                  setContext(false);
+                  setRefresh(!refreshProject);
+                }}
+              ></Block>
+            </div>
+            <div className="c6">
+              <Check
+                className="vector"
+                src={Check}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  changePriority(selectedProject, 5);
+                  setContext(false);
+                  setRefresh(!refreshProject);
+                }}
+              ></Check>
             </div>
           </div>
 

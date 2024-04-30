@@ -128,6 +128,23 @@ class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+
+ipcMain.on('window-functions', async (event, args) => {
+  console.log(args[0]);
+
+  switch (args[0]) {
+    case 'minimize':
+      mainWindow.minimize();
+      break;
+    case 'maximize':
+      mainWindow.maximize();
+      break;
+    case 'close':
+      mainWindow.close();
+      break;
+  }
+});
+
 ipcMain.on('get-project-count', async (event, args) => {
   const files = fs.readdirSync(aepPath);
 
@@ -142,7 +159,7 @@ ipcMain.on('recover-aep', async (event, args) => {
     (err, stats) => {
       if (err) {
         console.log('No autosaves directive.');
-        event.reply('recover-aep', [false, 'no auto-saves directive exists.']);
+        event.reply('recover-aep', [false, 'No auto-saves directive exists.']);
         return;
       }
 
@@ -207,7 +224,7 @@ ipcMain.on('recover-aep', async (event, args) => {
         ]);
       } else {
         console.log('ERROR: No further auto-saves to recover from.');
-        event.reply('recover-aep', [false, 'no more auto-saves available.']);
+        event.reply('recover-aep', [false, 'No more auto-saves available.']);
       }
     },
   );
@@ -258,7 +275,7 @@ ipcMain.on('rename-project', async (event, args) => {
   let newName = args[1];
 
   if (newName == null || newName == '' || newName == ' ') {
-    event.reply('rename-project', [false, 'file name cannot be blank!']);
+    event.reply('rename-project', [false, 'File name cannot be blank!']);
     return;
   }
   var files = fs.readdirSync(aepPath);
@@ -267,7 +284,7 @@ ipcMain.on('rename-project', async (event, args) => {
     console.log(files[i]);
     if (newName == files[i]) {
       console.log('file already exists');
-      event.reply('rename-project', [false, 'file name already exists!']);
+      event.reply('rename-project', [false, 'File name already exists!']);
       return;
     }
   }
@@ -292,7 +309,7 @@ ipcMain.on('rename-project', async (event, args) => {
     fs.renameSync(aepPath + '\\' + oldName, aepPath + '\\' + newName);
     event.reply('rename-project', [
       true,
-      'renamed ' + oldName + ' to ' + newName + '.',
+      'Renamed ' + oldName + ' to ' + newName + '.',
     ]);
   } catch (error) {
     console.error(error);
@@ -543,7 +560,7 @@ ipcMain.on('delete-project', async (event, args) => {
     );
   } catch (error) {}
 
-  event.reply('delete-project', [true, 'successfully deleted ' + args[0]]);
+  event.reply('delete-project', [true, 'Successfully deleted ' + args[0]]);
 });
 ipcMain.on('set-priority', async (event, args) => {
   changePriority(args, prioritiesPath);
@@ -763,6 +780,7 @@ const createWindow = async () => {
     show: false,
     minHeight: 720,
     minWidth: 1280,
+    frame: false,
 
     icon: getAssetPath('icon.png'),
     webPreferences: {
@@ -771,6 +789,7 @@ const createWindow = async () => {
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
+  mainWindow.setBackgroundColor('#0000');
   mainWindow.setMenuBarVisibility(false);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));

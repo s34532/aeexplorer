@@ -17,6 +17,7 @@
 .page-container{
     display:flex;
     flex-direction: column;
+    width:calc(100vw - var(--sidebar-width));
 
 }
 .input{

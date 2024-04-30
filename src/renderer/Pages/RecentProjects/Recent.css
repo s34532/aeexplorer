@@ -214,6 +214,10 @@ animation: load-animation 1s cubic-bezier(0, 0.75, 0.03, 1);
     margin-left:1vw;
     width:200px;
   }
+  #list-col-2{
+    margin-right:1vw;
+    
+  }
 
   .list-project-name{
     

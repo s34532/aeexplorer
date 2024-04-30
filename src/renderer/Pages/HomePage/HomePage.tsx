@@ -18,7 +18,18 @@ const HomePage = (props: Props) => {
             You have <span className="highlighted-text">{projectsLength}</span>{' '}
             Projects!
           </div>
-          <p className="homepage-text">Start optimizing your workflow today!</p>
+          <p className="homepage-text">
+            Continue optimizing your workflow today!
+          </p>
+
+          <div className="homepage-button-container">
+            <Link
+              to={hasProjects ? '/projects' : '/CreateAEP'}
+              className="start-button"
+            >
+              <span className="button-text">View projects</span>
+            </Link>
+          </div>
         </>
       );
     } else {
@@ -31,6 +42,15 @@ const HomePage = (props: Props) => {
           <p className="homepage-text">
             Start optimizing your workflow and create today!
           </p>
+
+          <div className="homepage-button-container">
+            <Link
+              to={hasProjects ? '/projects' : '/CreateAEP'}
+              className="start-button"
+            >
+              <span className="button-text">View project</span>
+            </Link>
+          </div>
         </>
       );
     }
@@ -74,17 +94,17 @@ const HomePage = (props: Props) => {
                 <p className="homepage-text">
                   Organize your After Effects Projects all in one location.
                 </p>
+
+                <div className="homepage-button-container">
+                  <Link
+                    to={hasProjects ? '/projects' : '/CreateAEP'}
+                    className="start-button"
+                  >
+                    <span className="button-text">Start now</span>
+                  </Link>
+                </div>
               </>
             )}
-
-            <div className="homepage-button-container">
-              <Link
-                to={hasProjects ? '/projects' : '/CreateAEP'}
-                className="start-button"
-              >
-                <span className="button-text">Start now</span>
-              </Link>
-            </div>
           </div>
         </div>
       </div>

@@ -4,9 +4,17 @@
     display:flex;
     flex-direction: column;
     
+    
 }
 
 
+#projects-content{
+    
+    width:calc(100vw - var(--sidebar-width));
+    height:calc(100vh - 32px);
+    overflow-y: auto;
+  
+}
 
 
 
@@ -41,6 +49,7 @@
     margin-right: 23px;
     margin-top:15px;
     margin-bottom:15px;
+    
   }
 
 .projects-list{
@@ -92,7 +101,7 @@ hr.solid {
 .project-item {
   
 
-    width:100px;
+    width:112px;
     overflow: hidden;
     word-wrap:break-word;
    
@@ -187,7 +196,7 @@ hr.solid {
 
     animation:search-opacity 0.6s;
     position:fixed;
-    top:50px;
+    top:80px;
     padding:2em;
     margin:-2em;
     background-color:white;
