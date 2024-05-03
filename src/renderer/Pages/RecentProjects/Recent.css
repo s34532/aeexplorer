@@ -8,17 +8,15 @@
 
 
 .recent-container{
-  
+    
     justify-content: center;
     margin: 0 auto;
     position: relative;
     height: calc(100vh - 90px);
-    width: calc(100vw - 90px);
+    width:calc(100vw - 72px);
     display:flex;
     flex-direction: row;
     overflow: hidden;
-
-  
    
 }
 #project-date{
@@ -45,10 +43,11 @@ animation: load-animation 1s cubic-bezier(0, 0.75, 0.03, 1);
 .content-column{
 
   
-    margin-right:45px;
-    margin-left:3vw;
-    width:116vh;
+    margin-right:12vw;
+    margin-left:12vw;
+    width:100%;
     justify-content: center;
+ 
 }
 
 

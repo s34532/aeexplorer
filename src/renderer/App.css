@@ -111,6 +111,7 @@ body{
     
     position:fixed;
     height:calc(100vh - 32px);
+  
     padding-left:var(--sidebar-width);
     flex-grow:1;
     bottom:0;

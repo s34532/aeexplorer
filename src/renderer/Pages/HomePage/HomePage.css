@@ -71,6 +71,7 @@
     display:flex;
     flex-direction:row;
     gap:20px;
+    
 }
 
 .start-button{
@@ -83,6 +84,7 @@
 	cursor: pointer;
     box-shadow:inset 0px 0px 4px 2px rgba(255, 255, 255, 0.333);
 
+    
     display:inline-flex;
     align-items: center;
     justify-content: center;
@@ -111,7 +113,7 @@
 	background-size: 400% 400%;
     animation: button-wipe 5s infinite;
 
-    transform: scale(1.02);
+    
 }
 @keyframes gradient {
 	0% {

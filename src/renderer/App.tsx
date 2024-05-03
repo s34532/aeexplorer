@@ -53,7 +53,6 @@ export default function App() {
               handleWindow('close');
             }}
             className="window-buttons"
-            id="close-button"
           />
         </div>
       </div>

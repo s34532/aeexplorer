@@ -20,6 +20,7 @@ import DeleteProject from '../../Components/DeleteProject/DeleteProject';
 import RenameProject from '../../Components/RenameProject/RenameProject';
 import RecoverProject from '../../Components/RecoverProject/RecoverProject';
 import Notification from '../../Components/Notification/Notification';
+import { motion } from 'framer-motion';
 
 const Projects = (props: Props) => {
   const [fix, setFix] = useState(false);
@@ -190,16 +191,23 @@ const Projects = (props: Props) => {
     return (
       <ul className="projects-list">
         {filteredProjects.map((project, index) => (
-          <li
-            id="project-list"
-            onClick={() => handleOpen(project)}
-            key={index}
-            className="project-item"
-            onContextMenu={(e) => showNav(e, project)}
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            className="box"
+            whileHover={{ scale: 1.075 }}
+            transition={{ type: 'spring', stiffness: 700, damping: 25 }}
           >
-            <div className="aep-img">{aepSVG(project)}</div>
-            {project + '.aep'}
-          </li>
+            <li
+              id="project-list"
+              onClick={() => handleOpen(project)}
+              key={index}
+              className="project-item"
+              onContextMenu={(e) => showNav(e, project)}
+            >
+              <div className="aep-img">{aepSVG(project)}</div>
+              {project + '.aep'}
+            </li>
+          </motion.div>
         ))}
       </ul>
     );
@@ -215,16 +223,25 @@ const Projects = (props: Props) => {
             <hr className="solid"></hr>
             <ul className="projects-list" id="list-select">
               {dictionary[date].map((project, index) => (
-                <li
-                  id="project-list"
-                  onClick={() => handleOpen(project.name)}
-                  key={index}
-                  className="project-item"
-                  onContextMenu={(e) => showNav(e, project.name)}
+                <motion.div
+                  whileTap={{ scale: 0.9 }}
+                  className="box"
+                  whileHover={{ scale: 1.075 }}
+                  transition={{ type: 'spring', stiffness: 700, damping: 25 }}
                 >
-                  {aepSVG(project.name)}
-                  <span className="project-name">{project.name + '.aep'}</span>
-                </li>
+                  <li
+                    id="project-list"
+                    onClick={() => handleOpen(project.name)}
+                    key={index}
+                    className="project-item"
+                    onContextMenu={(e) => showNav(e, project.name)}
+                  >
+                    {aepSVG(project.name)}
+                    <span className="project-name">
+                      {project.name + '.aep'}
+                    </span>
+                  </li>
+                </motion.div>
               ))}
             </ul>
           </div>
@@ -272,16 +289,23 @@ const Projects = (props: Props) => {
         <div className="projects">
           <ul className="projects-list">
             {pinnedProjects.map((name, index) => (
-              <li
-                id="project-list"
-                onClick={() => handleOpen(name)}
-                key={index}
-                className="project-item"
-                onContextMenu={(e) => showNav(e, name)}
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="box"
+                whileHover={{ scale: 1.075 }}
+                transition={{ type: 'spring', stiffness: 700, damping: 25 }}
               >
-                {aepSVG(name)}
-                {name + '.aep'}
-              </li>
+                <li
+                  id="project-list"
+                  onClick={() => handleOpen(name)}
+                  key={index}
+                  className="project-item"
+                  onContextMenu={(e) => showNav(e, name)}
+                >
+                  {aepSVG(name)}
+                  {name + '.aep'}
+                </li>
+              </motion.div>
             ))}
           </ul>
         </div>

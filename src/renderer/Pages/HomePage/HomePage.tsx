@@ -3,7 +3,7 @@ import './HomePage.css';
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg';
 import { Link } from 'react-router-dom';
 import { ReactComponent as ChevronRight } from '../../../../assets/chevron-right.svg';
-
+import { motion } from 'framer-motion';
 interface Props {}
 
 const HomePage = (props: Props) => {
@@ -23,12 +23,20 @@ const HomePage = (props: Props) => {
           </p>
 
           <div className="homepage-button-container">
-            <Link
-              to={hasProjects ? '/projects' : '/CreateAEP'}
-              className="start-button"
+            <motion.div
+              whileTap={{ scale: 0.9 }}
+              className="box"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
-              <span className="button-text">View projects</span>
-            </Link>
+              <Link
+                to={hasProjects ? '/projects' : '/CreateAEP'}
+                className="start-button"
+                onDragStart={(e) => e.preventDefault()}
+              >
+                <span className="button-text">View Projects</span>
+              </Link>
+            </motion.div>
           </div>
         </>
       );
