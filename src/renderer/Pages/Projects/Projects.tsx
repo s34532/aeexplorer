@@ -20,7 +20,7 @@ import DeleteProject from '../../Components/DeleteProject/DeleteProject';
 import RenameProject from '../../Components/RenameProject/RenameProject';
 import RecoverProject from '../../Components/RecoverProject/RecoverProject';
 import Notification from '../../Components/Notification/Notification';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const Projects = (props: Props) => {
   const [fix, setFix] = useState(false);
@@ -51,6 +51,24 @@ const Projects = (props: Props) => {
 
   const [responseCode, setResponseCode] = useState(false);
   const [projectsLength, setProjectsLength] = useState(0);
+
+  function SectionView({ children }) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+    return (
+      <section ref={ref}>
+        <span
+          style={{
+            opacity: isInView ? 1 : 0,
+            transition: 'all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1) 0s',
+          }}
+        >
+          {children}
+        </span>
+      </section>
+    );
+  }
 
   function pinProject(name) {
     window.electron.ipcRenderer.sendMessage('add-pinned', [name]);
@@ -126,12 +144,20 @@ const Projects = (props: Props) => {
     setFilteredProjects(names);
   }
 
-  function handleOpen(project: string) {
-    window.electron.ipcRenderer.sendMessage('open-aep', project);
-    window.electron.ipcRenderer.sendMessage('add-recent-aep', project);
-    setResponseCode(true);
-    setNotificationText('Opening ' + project + '.aep...');
-    setNotificationVisibility(true);
+  function handleOpen(e, project: string) {
+    console.log(project);
+    if (e.ctrlKey) {
+      window.electron.ipcRenderer.sendMessage('ctrl-click-project', [project]);
+      setResponseCode(true);
+      setNotificationText('Opening ' + project + '.aep in the File Explorer');
+      setNotificationVisibility(true);
+    } else {
+      window.electron.ipcRenderer.sendMessage('open-aep', project);
+      window.electron.ipcRenderer.sendMessage('add-recent-aep', project);
+      setResponseCode(true);
+      setNotificationText('Opening ' + project + '.aep in After Effects...');
+      setNotificationVisibility(true);
+    }
   }
 
   function showNav(event, project: string) {
@@ -194,12 +220,16 @@ const Projects = (props: Props) => {
           <motion.div
             whileTap={{ scale: 0.9 }}
             className="box"
-            whileHover={{ scale: 1.075 }}
-            transition={{ type: 'spring', stiffness: 700, damping: 25 }}
+            whileHover={{ scale: [null, 1.1, null] }}
+            transition={{
+              type: 'just',
+
+              duration: 0.1,
+            }}
           >
             <li
               id="project-list"
-              onClick={() => handleOpen(project)}
+              onClick={(e) => handleOpen(e, project)}
               key={index}
               className="project-item"
               onContextMenu={(e) => showNav(e, project)}
@@ -226,12 +256,16 @@ const Projects = (props: Props) => {
                 <motion.div
                   whileTap={{ scale: 0.9 }}
                   className="box"
-                  whileHover={{ scale: 1.075 }}
-                  transition={{ type: 'spring', stiffness: 700, damping: 25 }}
+                  whileHover={{ scale: [null, 1.1, null] }}
+                  transition={{
+                    type: 'just',
+
+                    duration: 0.1,
+                  }}
                 >
                   <li
                     id="project-list"
-                    onClick={() => handleOpen(project.name)}
+                    onClick={(e) => handleOpen(e, project.name)}
                     key={index}
                     className="project-item"
                     onContextMenu={(e) => showNav(e, project.name)}
@@ -292,14 +326,18 @@ const Projects = (props: Props) => {
               <motion.div
                 whileTap={{ scale: 0.9 }}
                 className="box"
-                whileHover={{ scale: 1.075 }}
-                transition={{ type: 'spring', stiffness: 700, damping: 25 }}
+                whileHover={{ scale: [null, 1.1, null] }}
+                transition={{
+                  type: 'just',
+
+                  duration: 0.1,
+                }}
               >
                 <li
-                  id="project-list"
-                  onClick={() => handleOpen(name)}
+                  id="project-list-pinned"
+                  onClick={(e) => handleOpen(e, name)}
                   key={index}
-                  className="project-item"
+                  className="project-item-pinned"
                   onContextMenu={(e) => showNav(e, name)}
                 >
                   {aepSVG(name)}

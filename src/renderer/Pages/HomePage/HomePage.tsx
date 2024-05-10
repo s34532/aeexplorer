@@ -3,7 +3,7 @@ import './HomePage.css';
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg';
 import { Link } from 'react-router-dom';
 import { ReactComponent as ChevronRight } from '../../../../assets/chevron-right.svg';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 interface Props {}
 
 const HomePage = (props: Props) => {

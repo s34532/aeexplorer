@@ -43,14 +43,7 @@
 
 
 
-#project-list {
-    list-style-type: none;
-    margin-left: 23px;
-    margin-right: 23px;
-    margin-top:15px;
-    margin-bottom:15px;
-    
-  }
+
 
 .projects-list{
     font-family: inter-medium;
@@ -96,19 +89,37 @@ hr.solid {
   }
 
 
+  #project-list {
+    list-style-type: none;
+    margin-left: 23px;
+    margin-right: 23px;
+    margin-top:12px;
+    margin-bottom:12px;
+  }
 
-
-.project-item {
+  #project-list-pinned {
+    list-style-type: none;
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-top:5px;
+    margin-bottom:5px;
+  }
   
 
+.project-item {
     width:112px;
     overflow: hidden;
     word-wrap:break-word;
-   
-  
- 
+    font-size:17px;
+    
 }
 
+.project-item-pinned {
+    width:85px;
+    overflow: hidden;
+    word-wrap:break-word;
+    font-size:15px;
+}
 
 
 @keyframes gradient-project{
@@ -257,10 +268,12 @@ hr.solid {
 
   @keyframes opacity {
     0% {
+        opacity:0.4;
         transform: scale(0.95);
     }
 
     100% {
+        opacity:1;
         transform: scale(1);
     }
   }

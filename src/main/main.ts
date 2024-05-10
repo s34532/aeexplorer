@@ -145,6 +145,11 @@ ipcMain.on('window-functions', async (event, args) => {
   }
 });
 
+ipcMain.on('ctrl-click-project', async (event, args) => {
+  console.log('args', args[0]);
+  let path = aepPath + '\\' + args[0];
+  require('child_process').exec(`start "" "${path}"`);
+});
 ipcMain.on('get-project-count', async (event, args) => {
   const files = fs.readdirSync(aepPath);
 
@@ -704,6 +709,8 @@ ipcMain.on('add-recent-aep', async (event, fileName) => {
   addRecentAEP(fileName);
 });
 ipcMain.on('create-aep', async (event, fileName) => {
+  fileName = fileName.replaceAll('/', '');
+  fileName = fileName.replaceAll('\\', '');
   var newDirective = aepPath + '\\' + fileName;
 
   // Create new folder

@@ -21,7 +21,8 @@ export type Channels =
   | 'get-directory'
   | 'recover-aep'
   | 'get-project-count'
-  | 'window-functions';
+  | 'window-functions'
+  | 'ctrl-click-project';
 
 const electronHandler = {
   ipcRenderer: {
