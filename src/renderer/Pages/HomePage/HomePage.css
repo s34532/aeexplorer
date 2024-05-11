@@ -36,7 +36,7 @@
 
 .highlighted-text{
    
-    font-family: inter-bold;
+    font-family: BricolageGrotesque;
     
     background: linear-gradient(-45deg, #ee7752, #FD37D6, #2489FF, #23d5ab);
 	background-size: 400% 400%;
@@ -53,18 +53,20 @@
 .big-title{
     text-align:center;
     color:white;
-    font-family: inter-medium;
+    font-family: BricolageGrotesque;
+    font-weight:300;
     /* font-size: 45px; */
-    font-size:5em;
+    font-size:9em;
 }
 
 .homepage-text{
     text-align:center;
-    color:rgb(192, 192, 192);
-    font-family: inter-medium;
+    color:rgb(255, 255, 255);
+    font-family: BricolageGrotesque;
+    font-weight:500;
     width:100%;
     font-size:1.5em;
-    margin-top:25px;
+    margin-top:0px;
 }
 
 .homepage-button-container{
@@ -95,13 +97,14 @@
     outline-width:1px;
     outline-color: #494949; */
     border-radius:40px;
-    font-family: inter-medium;
+    font-family: BricolageGrotesque;
+    font-weight:400;
     color:rgb(255, 255, 255);
     width:165px;
     height:50px;
-    background-color: #2489FF;
+    background-color: rgb(234, 76, 200);
     font-size: 17px;
-    margin-top:auto;
+    margin-top:20px;
 
     
 
@@ -109,7 +112,7 @@
 }
 .start-button:hover{
    
-    background: linear-gradient(-90deg, #2489FF, #6db1ff, #2489FF);
+    background: linear-gradient(-90deg, rgb(234, 136, 213), rgb(234, 76, 200), rgb(234, 136, 213));
 	background-size: 400% 400%;
     animation: button-wipe 5s infinite;
 

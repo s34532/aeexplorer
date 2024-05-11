@@ -155,24 +155,32 @@ body {
 
 @font-face {
     font-family:inter-medium;
-    src: url(..\\assets\\Font\\INTER-MEDIUM.OTF)
+    src: url(..\\assets\\Font\\BricolageGrotesque10pt-Medium-BF648bd579c0929.ttf)
 }
 @font-face {
     font-family:inter-light;
-    src: url(..\\assets\\Font\\INTER-LIGHT.OTF)
+    src: url(..\\assets\\FONT\\BricolageGrotesque10pt-Light-BF648bd5798be4f.ttf)
 }
 
 @font-face {
     font-family:inter-bold;
-    src: url(..\\assets\\Font\\INTER-BOLD.OTF)
+    src: url(..\\assets\\Font\\BricolageGrotesque10pt-Bold-BF648bd579369ff.ttf)
 }
 
 @font-face {
     font-family:B612-Regular;
-    src: url(..\\assets\\Font\\B612Mono-Regular.ttf)
+    src: url(..\\assets\\Font\\BricolageGrotesque10pt-Bold-BF648bd579369ff.ttf)
 }
 
 @font-face{
     font-family:larken;
-    src: url(..\\assets\\Font\\LARKEN-ITALIC.ttf)
+    src: url(..\\assets\\Font\\BricolageGrotesque10pt-Bold-BF648bd579369ff.ttf)
 }
+
+@font-face{
+    font-family:BricolageGrotesque;
+    src: url(..\\assets\\Font\\BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf)
+}
+
+
+
