@@ -115,7 +115,7 @@ hr.solid {
 }
 
 .project-item-pinned {
-    width:85px;
+    width:100px;
     overflow: hidden;
     word-wrap:break-word;
     font-size:15px;

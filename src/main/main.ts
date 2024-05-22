@@ -15,7 +15,7 @@ import {
 
 import { createFiles } from './functions/createJSON';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const { dialog } = require('electron');
 
 const home = process.env[process.platform == 'win32' ? 'USERPROFILE' : 'HOME'];
@@ -154,6 +154,96 @@ ipcMain.on('get-project-count', async (event, args) => {
   const files = fs.readdirSync(aepPath);
 
   event.reply('get-project-count', files.length);
+});
+
+function addClone(name) {
+  console.log('add clone to projects list');
+
+  try {
+    let read = fs.readFileSync(projectsPath, 'utf-8');
+    let json = JSON.parse(read);
+
+    let statsObj = fs.statSync(aepPath + '\\' + name);
+    let aep = fs.statSync(aepPath + '\\' + name + '\\' + name + '.aep');
+
+    json[name.toString()] = {
+      name: name,
+      date: statsObj.birthtime,
+      fileSize: aep.size / (1024 * 1024),
+    };
+
+    // write to json
+    try {
+      let newJSON = JSON.stringify(json);
+      fs.writeFileSync(projectsPath, newJSON);
+    } catch (error) {
+      console.error(error);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+ipcMain.on('clone-project', async (event, args) => {
+  let name = args[0];
+  let indexFound = false;
+  console.log('cloning project', name);
+
+  // folder paths
+  const originalPath = path.join(aepPath, name);
+  const tempPath = path.join(aepPath, 'BCq6LDdKMZv05n5');
+
+  try {
+    await fs.copy(originalPath, tempPath);
+    console.log('successfully moved folder');
+  } catch (err) {
+    console.log(err);
+    event.reply('clone-project', { success: false, error: err.message });
+    return;
+  }
+
+  // Figure out what index it needs to be
+  let i = 1;
+  while (!indexFound) {
+    const indexedPath = path.join(aepPath, `${name}(${i})`);
+    try {
+      await fs.access(indexedPath);
+      // If no error, it means the path exists, so increment the index and try again
+      i++;
+    } catch (err) {
+      // If there's an error, it means the path does not exist, so we can use this index
+      try {
+        const tempFilePath = path.join(tempPath, `${name}.aep`);
+        const tempFileNewPath = path.join(tempPath, `${name}(${i}).aep`);
+
+        // Check if the temporary file exists before renaming it
+        await fs.access(tempFilePath);
+
+        // Rename File
+        await fs.rename(tempFilePath, tempFileNewPath);
+        console.log('File renamed');
+
+        // Check if the temporary directory exists before renaming it
+        await fs.access(tempPath);
+
+        // Rename Folder
+        await fs.rename(tempPath, indexedPath);
+        console.log('Folder renamed');
+
+        addRecentAEP(`${name}(${i}).aep`);
+        addClone(`${name}(${i})`);
+        event.reply('clone-project', [
+          true,
+          'Successfully copied ' + args[0] + ' to ' + `${name}(${i})`,
+        ]);
+        indexFound = true;
+      } catch (error) {
+        console.error('Error renaming file or folder: ', error);
+        event.reply('clone-project', { success: false, error: error.message });
+        return;
+      }
+    }
+  }
 });
 ipcMain.on('recover-aep', async (event, args) => {
   let projectName = args[0];

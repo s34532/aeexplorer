@@ -77,6 +77,17 @@ const Projects = (props: Props) => {
     });
   }
 
+  function cloneProject(name) {
+    window.electron.ipcRenderer.sendMessage('clone-project', [name]);
+    window.electron.ipcRenderer.once('clone-project', (response) => {
+      setNotificationText(response[1]);
+      setResponseCode(response[0]);
+      setNotificationVisibility(true);
+
+      setRefresh(!refreshProject);
+    });
+  }
+
   function changePriority(name: String, priority: number) {
     window.electron.ipcRenderer.sendMessage('set-priority', [name, priority]);
   }
@@ -113,6 +124,7 @@ const Projects = (props: Props) => {
     window.electron.ipcRenderer.sendMessage('get-projects', ['changes']);
     window.electron.ipcRenderer.once('get-projects', (response) => {
       setArray(Object.values(response));
+      console.log(response);
     });
   }
 
@@ -384,6 +396,7 @@ const Projects = (props: Props) => {
   }, []);
 
   useEffect(() => {
+    console.log('refreshed');
     getPinned();
     getPriorities();
     getProjects();
@@ -472,14 +485,15 @@ const Projects = (props: Props) => {
           xyPosition={xyPosition}
           selectedProject={selectedProject}
           changePriority={changePriority}
-          refreshProject={refreshProject}
           setContext={setContext}
-          setRefresh={setRefresh}
           setModalVisibility={setModalVisibility}
           setSelected={setSelected}
           pinProject={pinProject}
           setRenameVisibility={setRenameVisibility}
           setRecoverVisibility={setRecoverVisibility}
+          cloneProject={cloneProject}
+          refreshProject={refreshProject}
+          setRefresh={setRefresh}
         />
 
         <span className="container-background">

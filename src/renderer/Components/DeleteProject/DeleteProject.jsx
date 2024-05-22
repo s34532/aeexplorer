@@ -18,7 +18,7 @@ function DeleteProject({
     setNotificationVisibility(true);
   }
 
-  async function removeProject(selectedProject) {
+  function removeProject(selectedProject) {
     window.electron.ipcRenderer.sendMessage('delete-project', [
       selectedProject,
     ]);

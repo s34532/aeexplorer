@@ -13,23 +13,26 @@ import { ReactComponent as DeleteIcon } from '../../../../assets/delete-forever.
 import { ReactComponent as Pin } from '../../../../assets/pin.svg';
 import { ReactComponent as Rename } from '../../../../assets/rename.svg';
 import { ReactComponent as Recover } from '../../../../assets/history.svg';
+import { ReactComponent as Copy } from '../../../../assets/copy.svg';
 
 const ContextMenu = ({
   showNav,
   hideContext,
-  refreshProject,
   changePriority,
   context,
   xyPosition,
   selectedProject,
   setContext,
-  setRefresh,
   setModalVisibility,
   setSelected,
   pinProject,
   setRenameVisibility,
   recoverAEP,
   setRecoverVisibility,
+  cloneProject,
+
+  refreshProject,
+  setRefresh,
 }) => {
   return (
     <div
@@ -150,6 +153,17 @@ const ContextMenu = ({
           >
             <div>Recover</div>
             <Recover className="recover-icon" />
+          </li>
+          <li
+            className="menuElement"
+            onClick={(e) => {
+              e.stopPropagation();
+              cloneProject(selectedProject);
+              setContext(false);
+            }}
+          >
+            <div>Clone</div>
+            <Copy className="copy-icon" />
           </li>
           <li
             className="menuElement"

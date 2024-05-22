@@ -144,6 +144,28 @@
     justify-content: space-between;
  
 }
+.rightClick li:nth-child(5):hover{
+    border-radius: 6px;
+    background-color: #ffffff1b;
+    
+}
+.copy-icon{
+    
+    margin-left: 5px;
+    fill:#ffffff;
+    transform: scale(0.8);
+    
+}
+
+
+
+.rightClick li:nth-child(6){
+    display:flex;
+    color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+ 
+}
 .recover-icon{
     
     margin-left: 5px;
@@ -152,7 +174,7 @@
     
 }
 
-.rightClick li:nth-child(5):hover{
+.rightClick li:nth-child(6):hover{
 
     
     border-radius: 6px;
